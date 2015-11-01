@@ -1,0 +1,21 @@
+{
+  "name": "jobscout",
+  "version": "1.0.0",
+  "description": "scraping indeed and posting to twitter",
+  "main": "app.js",
+  "dependencies": {
+    "request": "^2.65.0",
+    "rethinkdb": "^2.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "indeed",
+    "twitter",
+    "jobs"
+  ],
+  "author": "Ian Jennings <ian@futurehat.com> (http://twitter.com/scbian)",
+  "license": "ISC"
+}

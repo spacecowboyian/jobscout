@@ -1,0 +1,31 @@
+2015-10-31T12:22:51.186219000 0.576214s notice: Recursively removing directory /Users/ian/repos/jobscout/app/rethinkdb_data/tmp
+2015-10-31T12:22:51.187240000 0.577238s notice: Initializing directory /Users/ian/repos/jobscout/app/rethinkdb_data
+2015-10-31T12:22:51.187310000 0.577303s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/Users/ian/repos/jobscout/app/rethinkdb_data' did not already exist or is empty.)
+2015-10-31T12:22:51.187334000 0.577327s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-10-31T12:22:51.191274000 0.581270s notice: Running on Darwin 14.5.0 x86_64
+2015-10-31T12:22:51.191349000 0.581342s notice: Loading data from directory /Users/ian/repos/jobscout/app/rethinkdb_data
+2015-10-31T12:22:53.111777000 2.501792s info: Automatically using cache size of 2981 MB
+2015-10-31T12:22:53.112325000 2.502341s notice: Listening for intracluster connections on port 29015
+2015-10-31T12:22:53.113643000 2.503658s notice: Listening for client driver connections on port 28015
+2015-10-31T12:22:53.113714000 2.503730s notice: Listening for administrative HTTP connections on port 8080
+2015-10-31T12:22:53.113719000 2.503734s notice: Listening on addresses: 127.0.0.1, ::1
+2015-10-31T12:22:53.113722000 2.503737s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-10-31T12:22:53.113725000 2.503740s notice: Server ready, "ian_fma" 7a1d5792-5fca-4b90-8c15-b46a4c04e67d
+2015-10-31T12:22:53.249006000 2.639021s notice: A newer version of the RethinkDB server is available: 2.1.5-2. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+2015-10-31T12:23:07.641826000 17.031988s notice: Server got SIGINT from pid 1069, uid 501; shutting down...
+2015-10-31T12:23:07.641935000 17.032096s notice: Shutting down client connections...
+2015-10-31T12:23:07.642024000 17.032185s notice: All client connections closed.
+2015-10-31T12:23:07.642028000 17.032189s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-10-31T12:23:07.642292000 17.032453s notice: Storage engine shut down.
+2015-10-31T12:23:12.690672000 0.413940s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-10-31T12:23:12.694917000 0.418183s notice: Running on Darwin 14.5.0 x86_64
+2015-10-31T12:23:12.695046000 0.418310s notice: Loading data from directory /Users/ian/repos/jobscout/app/rethinkdb_data
+2015-10-31T12:23:13.573996000 1.297271s info: Automatically using cache size of 2984 MB
+2015-10-31T12:23:13.574531000 1.297806s notice: Listening for intracluster connections on port 29015
+2015-10-31T12:23:13.575883000 1.299158s notice: Listening for client driver connections on port 28015
+2015-10-31T12:23:13.575958000 1.299233s notice: Listening for administrative HTTP connections on port 8080
+2015-10-31T12:23:13.575962000 1.299237s notice: Listening on addresses: 127.0.0.1, ::1
+2015-10-31T12:23:13.575965000 1.299240s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-10-31T12:23:13.575970000 1.299245s notice: Server ready, "ian_fma" 7a1d5792-5fca-4b90-8c15-b46a4c04e67d
+2015-10-31T12:23:13.656252000 1.379527s notice: A newer version of the RethinkDB server is available: 2.1.5-2. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+2015-11-01T00:32:40.715611000 43768.854125s notice: Removing file /Users/ian/repos/jobscout/app/rethinkdb_data/b4ef8a39-9a06-4014-866b-dbd6b6d4b000
