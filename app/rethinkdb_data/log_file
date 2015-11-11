@@ -29,3 +29,41 @@
 2015-10-31T12:23:13.575970000 1.299245s notice: Server ready, "ian_fma" 7a1d5792-5fca-4b90-8c15-b46a4c04e67d
 2015-10-31T12:23:13.656252000 1.379527s notice: A newer version of the RethinkDB server is available: 2.1.5-2. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
 2015-11-01T00:32:40.715611000 43768.854125s notice: Removing file /Users/ian/repos/jobscout/app/rethinkdb_data/b4ef8a39-9a06-4014-866b-dbd6b6d4b000
+2015-11-06T03:33:14.388642607 0.020312s notice: Recursively removing directory /home/spacecowboyian/Applications/jobscout/app/rethinkdb_data/tmp
+2015-11-06T03:33:14.397572153 0.029241s notice: Running rethinkdb 2.1.5+2~0trusty (GCC 4.8.2)...
+2015-11-06T03:33:14.400043610 0.031714s notice: Running on Linux 3.13.0-29-generic x86_64
+2015-11-06T03:33:14.400163462 0.031832s notice: Loading data from directory /home/spacecowboyian/Applications/jobscout/app/rethinkdb_data
+2015-11-06T03:33:14.406377688 0.038046s notice: Migrating cluster metadata
+2015-11-06T03:33:14.533667380 0.165336s notice: Migrating auth metadata
+2015-11-06T03:33:14.548073856 0.179744s info: Automatically using cache size of 100 MB
+2015-11-06T03:33:14.548246572 0.179915s warn: Cache size does not leave much memory for server and query overhead (available memory: 839 MB).
+2015-11-06T03:33:14.548252205 0.179920s warn: Cache size is very low and may impact performance.
+2015-11-06T03:33:14.548960738 0.180629s notice: Listening for intracluster connections on port 29015
+2015-11-06T03:33:14.570499337 0.202168s warn: Table jobscout.jobs (789bf0db-807c-4667-a4da-03d7d7d3c87f) contains these outdated indexes which should be recreated: 'jobkey', 'url'
+2015-11-06T03:33:14.571096698 0.202765s notice: Listening for client driver connections on port 28015
+2015-11-06T03:33:14.571283127 0.202952s notice: Listening for administrative HTTP connections on port 8080
+2015-11-06T03:33:14.571288426 0.202957s notice: Listening on addresses: 127.0.0.1, ::1
+2015-11-06T03:33:14.571290853 0.202959s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-11-06T03:33:14.571295344 0.202963s notice: Server ready, "ian_fma" 7a1d5792-5fca-4b90-8c15-b46a4c04e67d
+2015-11-06T03:33:15.919862337 1.551531s info: Table 789bf0db-807c-4667-a4da-03d7d7d3c87f: Starting a new Raft election for term 1.
+2015-11-06T03:33:15.937445845 1.569114s info: Table 789bf0db-807c-4667-a4da-03d7d7d3c87f: This server is Raft leader for term 1. Latest log index is 0.
+2015-11-06T03:33:20.123206418 5.754875s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-11-06T03:33:20.123444773 5.755113s notice: Shutting down client connections...
+2015-11-06T03:33:20.123593586 5.755262s notice: All client connections closed.
+2015-11-06T03:33:20.123699931 5.755368s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-11-06T03:33:20.125484260 5.757153s notice: Storage engine shut down.
+2015-11-06T03:36:40.778971053 0.032754s notice: Running rethinkdb 2.1.5+2~0trusty (GCC 4.8.2)...
+2015-11-06T03:36:40.781534110 0.035318s notice: Running on Linux 3.13.0-29-generic x86_64
+2015-11-06T03:36:40.781640984 0.035424s notice: Loading data from directory /home/spacecowboyian/Applications/jobscout/app/rethinkdb_data
+2015-11-06T03:36:40.840068205 0.093852s info: Automatically using cache size of 100 MB
+2015-11-06T03:36:40.840246674 0.094029s warn: Cache size does not leave much memory for server and query overhead (available memory: 841 MB).
+2015-11-06T03:36:40.840252358 0.094035s warn: Cache size is very low and may impact performance.
+2015-11-06T03:36:40.841029962 0.094813s notice: Listening for intracluster connections on port 29015
+2015-11-06T03:36:40.858803674 0.112587s warn: Table jobscout.jobs (789bf0db-807c-4667-a4da-03d7d7d3c87f) contains these outdated indexes which should be recreated: 'jobkey', 'url'
+2015-11-06T03:36:40.859518812 0.113302s notice: Listening for client driver connections on port 28015
+2015-11-06T03:36:40.859728556 0.113511s notice: Listening for administrative HTTP connections on port 8080
+2015-11-06T03:36:40.859753127 0.113536s notice: Listening on addresses: 127.0.0.1, ::1
+2015-11-06T03:36:40.859754640 0.113537s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-11-06T03:36:40.859757867 0.113540s notice: Server ready, "ian_fma" 7a1d5792-5fca-4b90-8c15-b46a4c04e67d
+2015-11-06T03:36:42.594114469 1.847897s info: Table 789bf0db-807c-4667-a4da-03d7d7d3c87f: Starting a new Raft election for term 2.
+2015-11-06T03:36:42.622966934 1.876750s info: Table 789bf0db-807c-4667-a4da-03d7d7d3c87f: This server is Raft leader for term 2. Latest log index is 3.

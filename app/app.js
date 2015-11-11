@@ -1,9 +1,19 @@
-var request = require( 'request' ),
+var _ = require( 'lodash' ),
+    request = require( 'request' ),
+    InfiniteLoop = require( 'infinite-loop' ),
+    accounts = require( './accounts.json' ),
+    jobTypes = require( './types.json' ),
+    Twitter = require( 'twitter' ),
 	rethink = require( 'rethinkdb' ),
 	jobsDB = rethink.db('jobscout'),
 	jobsTable = jobsDB.table('jobs'),
 	jobs,
-	connection;
+	jobList,
+	connection,
+	accountCount = 0,
+	il = new InfiniteLoop,
+	interval = parseInt(process.argv[ 3 ]),
+	manualAccountName = process.argv[ 2 ];
 
 rethink.connect({
   host: 'localhost',
@@ -14,51 +24,151 @@ rethink.connect({
   }
 
   connection = conn
-})
+});
 
+var buildURL = function( account ) {
+    var baseURL = 'http://api.indeed.com/ads/apisearch',
+        params = {
+            'publisher' : '5236162194932051',
+            'q' : getQuery( account.type ),
+            'l' : account.location,
+            'latlong' : '1',
+            'co' : 'us',
+            'userip' : '199.59.149.230',
+            'useragent' : 'Mozilla/5.0 Firefox/33.0',
+            'v' : '2',
+            'format' : 'json'
+        },
+        combine = function(params) {
+            var lst = [];
+            for (var key in params) {
+                if (params.hasOwnProperty(key)) {
+                    lst.push(encodeURIComponent(key)+"="+encodeURIComponent(params[key]));
+                }
+            }
+            return "?"+lst.join("&");
+        },
+        combineResult = combine( params );
+        
+        
+    return baseURL + combineResult;
+}
 
-request( 'http://api.indeed.com/ads/apisearch?publisher=5236162194932051&q=design&l=kansas+city%2C+mo&latlong=1&co=us&userip=65.28.83.242&useragent=Mozilla/%2F4.0%28Firefox%29&v=2&format=json', function ( error, response, body ) {
-  if ( !error && response.statusCode == 200 ) {
-    jobs = JSON.parse( body ); // We gots jsons!
+var getQuery = function( type ) {
+    var match = _.find( jobTypes.jobTypes, function(obj) { return obj.type == type }),
+        keywords = match.keywords.join();
+        
+    return keywords;
+}
 
-    parseJobs( jobs.results );
-    //insertJob( jobs.results[0] );
-  }
-})
+var pingAccount = function ( manualAccount ) {
+    var account,
+        url;
+        
+    if ( manualAccount ) {
+        account = manualAccount;   
+    } else {
+        account = accounts.accounts[ accountCount ]
+    }
+    url = buildURL( account );
+    request( url, function ( error, response, body ) {
+        if ( !error && response.statusCode == 200 ) {
+            jobs = JSON.parse( body ); // We gots jsons!
+            parseJobs( jobs.results, account );
+        } else {
+            console.log( 'you gots no jsons' );
+        }
+        if ( accountCount == accounts.accounts.length - 1 ) {
+            accountCount = 0;
+        } else {
+            accountCount++;
+        }
+    });
+}
 
-parseJobs = function( jobs ) {
-	jobs.forEach ( function( job ) {
-		var source = 'indeed', //hardcode for now
-			jobkey = job.jobkey,
-			url = job.url;
+if ( manualAccountName && manualAccountName != 'all' ) {
+    var manualAccount = _.findWhere( accounts.accounts, { 'name': manualAccountName });
+        
+    pingAccount( manualAccount );
+} else {
+    il.add( pingAccount );
+    il.run().setInterval( interval || 3000 );
+}
 
-		if ( source === 'indeed' ) {
-			jobsTable.getAll( jobkey, { index: 'jobkey'} ).run( connection, function(err, result) {
-		      	var isNew = result._responses[0] !== undefined ? false : true;
+var parseJobs = function( jobs, account ) {
+    var jobKeys = [],
+        usedJobs = [],
+        newJobs,
+        newJobsRefined = [];
+    
+    jobs.forEach( function( job ) {
+        jobKeys.push( job.jobkey );
+    });
+    
+    jobsTable.getAll(rethink.args(jobKeys), {index:'jobkey'}).run(connection, function( err, savedJobs ) {
+        savedJobs.toArray(function(err, results) {
+            if (err) throw err;
+            results.forEach( function( result ) {
+                usedJobs.push( result.jobkey );
+            });
+            newJobs = _.findByValues(jobs, 'jobkey', _.difference( jobKeys, usedJobs ));
+            newJobs.forEach( function( job ) {
+                var refinedJob = {
+            		title: job.jobtitle,
+            		company: job.company,
+            		url: job.url,
+            		createdOn: job.date,
+            		jobkey: job.jobkey,
+            		source: 'indeed'
+            	}
+            	
+            	newJobsRefined.push( refinedJob );
+            });
 
-		      	if ( isNew ) {
-			    	insertJob( job );
-			    } else {
-			    	console.log( 'old job' );
-			    }
-		    });
-		}
-	});
+            if (newJobsRefined.length > 0 ) {
+                postJobs ( account, newJobsRefined );
+            } else {
+            	console.log( 'no new jobs for ' + account.name );
+            }
+        });
+    });    
 };
 
-insertJob = function( job ) {
-	jobsTable.insert({
-		title: job.jobtitle,
-		url: job.url,
-		createdOn: job.date,
-		jobkey: job.jobkey,
-		source: 'indeed'
-	}).run(connection, function(err, response) {
+var insertJobs = function( account, newJobs ) {
+	jobsTable.insert( newJobs ).run(connection, function(err, response) {
 		if (err) {
-			console.log( 'nope' );
+			console.log( 'error saving job' );
 		} else {
-			console.log( 'job: ' + job.jobtitle + ' - ' + job.jobkey );
+			console.log( 'saved new jobs for ' + account.name );
 		}
 	})
 }
 
+var postJobs = function( account, jobs ) {
+    var client = new Twitter({
+        consumer_key: account.consumer,
+        consumer_secret: account.consumerSecret,
+        access_token_key: account.token,
+        access_token_secret: account.tokenSecret
+    });
+    
+    jobs.forEach( function( job ) {
+        var jobTweet = job.title + ' - ' + job.company + ' ' + job.url;
+        
+        client.post( 'statuses/update', { status: jobTweet },  function( err, tweet, response ){
+            if(err) throw err;
+            console.log(tweet.text);
+        });
+        
+    });
+    
+    insertJobs( account, jobs );
+}
+
+_.mixin({
+  'findByValues': function(collection, property, values) {
+    return _.filter(collection, function(item) {
+      return _.contains(values, item[property]);
+    });
+  }
+});

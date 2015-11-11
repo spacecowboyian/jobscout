@@ -1,0 +1,15 @@
+{ "jobTypes" : [
+    {
+        "type" : "design",
+        "keywords" : [
+            "design",
+            "illustration",
+            "printmaking",
+            "graphics"
+        ],
+        "filters": [
+            "admin",
+            "reception"
+        ]
+    }
+]}
