@@ -1,3 +1,4 @@
 /app/node_modules/*
+app/rethinkdb_data/*
 /app/accounts.json
 .DS_Store
