@@ -67,3 +67,24 @@
 2015-11-06T03:36:40.859757867 0.113540s notice: Server ready, "ian_fma" 7a1d5792-5fca-4b90-8c15-b46a4c04e67d
 2015-11-06T03:36:42.594114469 1.847897s info: Table 789bf0db-807c-4667-a4da-03d7d7d3c87f: Starting a new Raft election for term 2.
 2015-11-06T03:36:42.622966934 1.876750s info: Table 789bf0db-807c-4667-a4da-03d7d7d3c87f: This server is Raft leader for term 2. Latest log index is 3.
+2015-11-11T12:32:13.909698000 0.578934s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-11-11T12:32:13.913634000 0.582868s notice: Running on Darwin 14.5.0 x86_64
+2015-11-11T12:32:13.913739000 0.582971s notice: Loading data from directory /Users/ian/repos/jobscout/app/rethinkdb_data
+2015-11-11T12:32:13.915488000 0.584720s error: Data version not recognized. Is the data directory from a newer version of RethinkDB? (version on disk: 6)
+2015-11-11T12:40:40.314795000 0.446009s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-11-11T12:40:40.318616000 0.449826s notice: Running on Darwin 14.5.0 x86_64
+2015-11-11T12:40:40.318668000 0.449876s notice: Loading data from directory /Users/ian/repos/jobscout/app/rethinkdb_data
+2015-11-11T12:40:40.320018000 0.451227s error: Data version not recognized. Is the data directory from a newer version of RethinkDB? (version on disk: 6)
+2015-11-11T12:46:54.277644000 0.514399s notice: Running rethinkdb 2.1.5-2 (CLANG 7.0.0 (clang-700.0.72))...
+2015-11-11T12:46:54.281486000 0.518234s notice: Running on Darwin 14.5.0 x86_64
+2015-11-11T12:46:54.281534000 0.518281s notice: Loading data from directory /Users/ian/repos/jobscout/app/rethinkdb_data
+2015-11-11T12:46:54.662411000 0.899158s info: Automatically using cache size of 3716 MB
+2015-11-11T12:46:54.662794000 0.899541s notice: Listening for intracluster connections on port 29015
+2015-11-11T12:46:54.680546000 0.917293s warn: Table jobscout.jobs (789bf0db-807c-4667-a4da-03d7d7d3c87f) contains these outdated indexes which should be recreated: 'jobkey', 'url'
+2015-11-11T12:46:54.681359000 0.918106s notice: Listening for client driver connections on port 28015
+2015-11-11T12:46:54.681532000 0.918279s notice: Listening for administrative HTTP connections on port 8080
+2015-11-11T12:46:54.681534000 0.918281s notice: Listening on addresses: 127.0.0.1, ::1
+2015-11-11T12:46:54.681535000 0.918281s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-11-11T12:46:54.681637000 0.918384s notice: Server ready, "ian_fma" 7a1d5792-5fca-4b90-8c15-b46a4c04e67d
+2015-11-11T12:46:56.321582000 2.558349s info: Table 789bf0db-807c-4667-a4da-03d7d7d3c87f: Starting a new Raft election for term 3.
+2015-11-11T12:46:56.576632000 2.813398s info: Table 789bf0db-807c-4667-a4da-03d7d7d3c87f: This server is Raft leader for term 3. Latest log index is 6.

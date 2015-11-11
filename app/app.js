@@ -10,7 +10,6 @@ var _ = require( 'lodash' ),
 	jobs,
 	jobList,
 	connection,
-	accountCount = 0,
 	il = new InfiniteLoop,
 	interval = parseInt(process.argv[ 3 ]),
 	manualAccountName = process.argv[ 2 ];
@@ -62,27 +61,25 @@ var getQuery = function( type ) {
 }
 
 var pingAccount = function ( manualAccount ) {
-    var account,
+    var accountArray = [],
         url;
         
     if ( manualAccount ) {
-        account = manualAccount;   
+        accountArray.push( manualAccount );   
     } else {
-        account = accounts.accounts[ accountCount ]
+        accountArray = accounts.accounts;
     }
-    url = buildURL( account );
-    request( url, function ( error, response, body ) {
-        if ( !error && response.statusCode == 200 ) {
-            jobs = JSON.parse( body ); // We gots jsons!
-            parseJobs( jobs.results, account );
-        } else {
-            console.log( 'you gots no jsons' );
-        }
-        if ( accountCount == accounts.accounts.length - 1 ) {
-            accountCount = 0;
-        } else {
-            accountCount++;
-        }
+
+    accountArray.forEach( function( account ) {
+    	url = buildURL( account );
+	    request( url, function ( error, response, body ) {
+	        if ( !error && response.statusCode == 200 ) {
+	            jobs = JSON.parse( body ); // We gots jsons!
+	            parseJobs( jobs.results, account );
+	        } else {
+	            console.log( 'you gots no jsons' );
+	        }
+	    });
     });
 }
 

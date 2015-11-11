@@ -4,11 +4,12 @@
   "description": "scraping indeed and posting to twitter",
   "main": "app.js",
   "dependencies": {
+    "bluebird": "^3.0.5",
+    "infinite-loop": "^0.2.2",
+    "lodash": "^3.10.1",
     "request": "^2.65.0",
     "rethinkdb": "^2.1.1",
-    "bluebird": "^3.0.5",
-    "twitter": "^1.2.5",
-    "infinite-loop": "^0.2.2"
+    "twitter": "^1.2.5"
   },
   "devDependencies": {},
   "scripts": {
